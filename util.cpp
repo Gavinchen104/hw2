@@ -17,13 +17,15 @@ std::set<std::string> parseStringToWords(string rawWords){
 	set<string> set_of_words;
 	//changing all the punction to space
 	for(unsigned int i = 0; i < rawWords.size(); i++){
-		if(ispunct(rawWord[i])){
-			rawWords[i] = " ";
+		if(ispunct(rawWords[i])){
+			rawWords[i] = ' ';
 		}
 	}
 	stringstream ss(rawWords);
 	string temp;
+	//when encountering a space the input stops
 	while(ss >> temp){
+		//ignoring the word with only one character
 		if(temp.length() > 1){
 			set_of_words.insert(temp);
 		}
