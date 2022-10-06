@@ -4,13 +4,15 @@
 
 using namespace std;
 
-Clothing::Clothing(const std::string category, const std::string name, double price, int qty, string size, string brand):
+//initializing
+Clothing::Clothing(const std::string category, const std::string name, double price, int qty, std::string size, std::string brand):
 Product(category, name, price, qty),brand_(brand),size_(size){}
 
 std::set<std::string> Clothing:: keywords() const{
-	std::set<string> set1 = parseStringToWords(name_);
-	std::set<string> set2 = parseStringToWords(size_);
-	std::set<string> set3 = parseStringToWords(brand_);
+	//convert the string to lowercase AND into a set 
+	std::set<string> set1 = parseStringToWords(convToLower(name_));
+	std::set<string> set2 = parseStringToWords(convToLower(size_));
+	std::set<string> set3 = parseStringToWords(convToLower(brand_));
 	set1 = setUnion(set1,set2);
 	set1 = setUnion(set1,set3);
 	return set1;
@@ -19,6 +21,7 @@ std::set<std::string> Clothing:: keywords() const{
 std::string Clothing::displayString() const{
 	stringstream s1;
 	stringstream s2;
+	//input data to the stream
 	s1 << qty_;
 	s2 << price_;
 	string qty_string = s1.str();

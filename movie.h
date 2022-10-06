@@ -3,20 +3,19 @@
 
 #include "product.h"
 
-using namespace std;
 
 class Movie : public Product{
 
 	public:
-		Movie(const std::string category, const std::string name, double price, int qty, string genre, string rating);
-		~Movie();
-		set<std::string> keywords() const;
-		string displayString() const;
+		Movie(const std::string category, const std::string name, double price, int qty, std::string genre, std::string rating);
+		// ~Movie();
+		std::set<std::string> keywords() const;
+		std::string displayString() const;
 		void dump(std::ostream& os) const ;
 	
 	private:
-		string genre_;
-		string rating_;
+		std::string genre_;
+		std::string rating_;
 
 };
 

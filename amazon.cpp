@@ -5,10 +5,9 @@
 #include <vector>
 #include <iomanip>
 #include <algorithm>
-#include "product.h"
 #include "db_parser.h"
 #include "product_parser.h"
-#include "util.h"
+#include "mydatastore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,9 +28,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
-
-
+    MyDataStore ds;
 
     // Instantiate the individual section and product parsers we want
     ProductSectionParser* productSectionParser = new ProductSectionParser;
@@ -51,7 +48,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    cout << "=====================================" << endl;
     cout << "Menu: " << endl;
     cout << "  AND term term ...                  " << endl;
     cout << "  OR term term ...                   " << endl;
@@ -100,10 +96,55 @@ int main(int argc, char* argv[])
                 done = true;
             }
 	    /* Add support for other commands here */
+            //ADD
+            else if (cmd =="ADD"){ 
+                string name;
+                unsigned int index;
+                Product* p;
+                
+                //check to see if the usernmae is provided
+                if(ss >> name && ss >> index){
+                    //check to see if the index is valid
+                    if(index > hits.size() || index < 1){
+                        cout << "Invalid request" << endl;
+                    }
+                    else{
+                        p = hits[index-1];  
+												User* Name = ds.findUser(name);                     
+                        ds.addtoCart(Name, p);
+                    }    
+                }
+                //otherwise input invalid request
+                else{
+                    cout <<"Invalid request"<< endl;
+                }
+            }
+            //VIEWCART
+            else if(cmd == "VIEWCART"){
+							string name;
+              //check to see if the usernmae is provided
+							if(ss>>name){
+								User* Name = ds.findUser(name);
+                ds.viewCart(Name);
+							}
+                //otherwise output invalid
+							else{
+								cout << "Invalid username" << endl;
+							}
+            }
 
-
-
-
+            //BUYCART
+            else if(cmd =="BUYCART"){							
+							string name;							
+              //check to see if the usernmae is provided
+              if(ss>>name){
+								User* Name = ds.findUser(name);                 
+                ds.buyCart(Name);
+							}
+              else{
+								cout << "Invalid username" << endl;
+							}
+            }
             else {
                 cout << "Unknown command" << endl;
             }

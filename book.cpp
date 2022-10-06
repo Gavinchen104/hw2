@@ -4,14 +4,15 @@
 
 using namespace std;
 
-
-Book::Book(const std::string category, const std::string name, double price, int qty, string author, string isbn):
+//initializing 
+Book::Book(const std::string category, const std::string name, double price, int qty, std::string author, std::string isbn):
 Product(category, name, price, qty),isbn_(isbn),author_(author){}
 
 std::set<std::string> Book:: keywords() const{
-	std::set<string> set1 = parseStringToWords(name_);
-	std::set<string> set2 = parseStringToWords(author_);
-	std::set<string> set3 = parseStringToWords(isbn_);
+	//convert the string to lowercase AND into a set 
+	std::set<string> set1 = parseStringToWords(convToLower(name_));
+	std::set<string> set2 = parseStringToWords(convToLower(author_));
+	std::set<string> set3 = parseStringToWords(convToLower(isbn_));
 	set1 = setUnion(set1,set2);
 	set1 = setUnion(set1,set3);
 	return set1;
@@ -20,6 +21,7 @@ std::set<std::string> Book:: keywords() const{
 std::string Book::displayString() const{
 	stringstream s1;
 	stringstream s2;
+	//input data to the stream
 	s1 << qty_;
 	s2 << price_;
 	string qty_string = s1.str();
