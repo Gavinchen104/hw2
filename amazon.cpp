@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+		cout << "====================================" << endl;
     cout << "Menu: " << endl;
     cout << "  AND term term ...                  " << endl;
     cout << "  OR term term ...                   " << endl;
@@ -114,10 +115,7 @@ int main(int argc, char* argv[])
                         ds.addtoCart(Name, p);
                     }    
                 }
-                //otherwise input invalid request
-                else{
-                    cout <<"Invalid request"<< endl;
-                }
+                
             }
             //VIEWCART
             else if(cmd == "VIEWCART"){
@@ -126,10 +124,6 @@ int main(int argc, char* argv[])
 							if(ss>>name){
 								User* Name = ds.findUser(name);
                 ds.viewCart(Name);
-							}
-                //otherwise output invalid
-							else{
-								cout << "Invalid username" << endl;
 							}
             }
 
@@ -140,9 +134,6 @@ int main(int argc, char* argv[])
               if(ss>>name){
 								User* Name = ds.findUser(name);                 
                 ds.buyCart(Name);
-							}
-              else{
-								cout << "Invalid username" << endl;
 							}
             }
             else {

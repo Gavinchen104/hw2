@@ -62,7 +62,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 	
 	std:: set<Product*> temp_set;
 	std:: vector<Product*> temp_vec;
-	if(type == 0) // union
+	if(type == 1) // union
 	{	//setting the first set to be temp_set
 		temp_set = map_Product[terms[0]]; 
 		//find the union 
@@ -77,7 +77,7 @@ std::vector<Product*> MyDataStore::search(std::vector<std::string>& terms, int t
 		return temp_vec;
 	}
 	
-	else if(type == 1) //intersection
+	else if(type == 0) //intersection
 	{	//setting the first set to be temp_set
 		temp_set = map_Product[terms[0]]; 
 		//find the intersection
@@ -140,17 +140,21 @@ void MyDataStore:: viewCart(User* name){
 		return;
   } 
 	else{
+		int i=1;
 		std::map<User*, vector<Product*> >::iterator it;
-		cout << "products in the cart:" << endl;
-		cout << " " << endl;
+		// cout << "Item" << i << ":" << endl;
+		// cout << " " << endl;
 		for(it = map_cart.begin(); it!=map_cart.end(); ++it){
 			//find the cart that belongs to the user
 			if(it->first == name){
 				std::vector<Product*> :: iterator it2;
 				for(it2 = it->second.begin(); it2 != it->second.end(); ++it2){
 					//print all the products in the cart
+					cout << "Item " << i << endl;
 					cout << (*it2)->displayString() << endl;
 					cout << " " << endl;
+					i++;
+					cout << endl;
 				}
 			}
 		}
@@ -162,7 +166,7 @@ void MyDataStore:: viewCart(User* name){
 void MyDataStore:: buyCart(User* name){
   //check if the given user exist
 	if(set_user.find(name) == set_user.end()){
-    cout << "Invalid request" << endl;
+    cout << "Invalid username" << endl;
 		return;
   } 
 	else{
@@ -189,6 +193,7 @@ void MyDataStore:: buyCart(User* name){
 		}	
 		//update the new cart of the user
 		user_cart = new_cart;
+		map_cart.find(name)->second = user_cart;
 
 	}
 	return;

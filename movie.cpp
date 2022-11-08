@@ -1,6 +1,7 @@
 #include "movie.h"
 #include "util.h"
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -32,6 +33,6 @@ std::string Movie::displayString() const{
 
 }
 void Movie::dump(std::ostream& os) const{
-	os << category_ << "\n" << name_ << "\n" << price_ << "\n";
+	os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2)<< price_ << "\n";
   os << qty_ << "\n" << genre_ << "\n" << rating_ << "\n";
 }

@@ -1,6 +1,7 @@
 #include "book.h"
 #include "util.h"
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -9,13 +10,16 @@ Book::Book(const std::string category, const std::string name, double price, int
 Product(category, name, price, qty),isbn_(isbn),author_(author){}
 
 std::set<std::string> Book:: keywords() const{
-	//convert the string to lowercase AND into a set 
+	// convert the string to lowercase AND into a set 
 	std::set<string> set1 = parseStringToWords(convToLower(name_));
 	std::set<string> set2 = parseStringToWords(convToLower(author_));
-	std::set<string> set3 = parseStringToWords(convToLower(isbn_));
-	set1 = setUnion(set1,set2);
-	set1 = setUnion(set1,set3);
-	return set1;
+	std::set<string> set3 = setUnion(set1,set2);
+	std::set<string> set4;
+	for(std::set<std::string>::iterator it = set3.begin(); it!=set3.end(); ++it){
+  	set4.insert(convToLower(*it));
+	}
+	set4.insert(isbn_);
+ 	return set4;
 }
 
 std::string Book::displayString() const{
@@ -32,6 +36,6 @@ std::string Book::displayString() const{
 
 }
 void Book::dump(std::ostream& os) const{
-	os << category_ << "\n" << name_ << "\n" << price_ << "\n";
+	os << category_ << "\n" << name_ << "\n" << fixed << setprecision(2)<< price_ << "\n";
   os << qty_ << "\n" << isbn_ << "\n" << author_ << "\n";
 }

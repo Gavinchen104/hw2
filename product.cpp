@@ -1,6 +1,7 @@
 #include <sstream>
 #include <iomanip>
 #include "product.h"
+#include "util.h"
 
 using namespace std;
 
@@ -8,7 +9,7 @@ Product::Product(const std::string category, const std::string name, double pric
     name_(name),
     price_(price),
     qty_(qty),
-    category_(category)
+    category_(convToLower(category))
 {
 
 }
@@ -50,7 +51,7 @@ bool Product::isMatch(std::vector<std::string>& searchTerms) const
 
 void Product::dump(std::ostream& os) const
 {
-    os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << endl;
+    os << category_ << "\n" << name_ << "\n" <<fixed << setprecision(2)<< price_ << "\n" << qty_ << endl;
 }
 
 
