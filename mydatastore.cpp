@@ -10,7 +10,11 @@
 
 using namespace std;
 
-MyDataStore::MyDataStore() { 
+MyDataStore::MyDataStore() {
+	// std::map<std::string,std::set<Product*> > map_Product;
+  // std::set<User*> set_user;
+	// std::set<Product*> set_product;
+  // std::map<User*,std::vector<Product*> > map_cart;
 
 }
 
