@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-		cout << "====================================" << endl;
+	cout << "====================================" << endl;
     cout << "Menu: " << endl;
     cout << "  AND term term ...                  " << endl;
     cout << "  OR term term ...                   " << endl;
@@ -111,7 +111,7 @@ int main(int argc, char* argv[])
                     }
                     else{
                         p = hits[index-1];  
-												User* Name = ds.findUser(name);                     
+						User* Name = ds.findUser(name);                     
                         ds.addtoCart(Name, p);
                     }    
                 }
@@ -128,13 +128,13 @@ int main(int argc, char* argv[])
             }
 
             //BUYCART
-            else if(cmd =="BUYCART"){							
-							string name;							
-              //check to see if the usernmae is provided
-              if(ss>>name){
-								User* Name = ds.findUser(name);                 
-                ds.buyCart(Name);
-							}
+            else if(cmd =="BUYCART"){
+                string name;
+                //check to see if the usernmae is provided
+                if(ss>>name){
+					User* Name = ds.findUser(name);
+                    ds.buyCart(Name);
+                }
             }
             else {
                 cout << "Unknown command" << endl;
